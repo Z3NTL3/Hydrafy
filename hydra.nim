@@ -8,7 +8,6 @@ var
   payloadSize = 1048
   targetHost: string
   targetPort: int
-  timeoutMS: int
 type
   ServerTab = ref object of RootObj
     host: string
@@ -30,7 +29,7 @@ proc Usage(): void =
     $terminal["red"] & "Invalid usage" &
     $terminal["reset"]
   echo $terminal["bold"] &
-    "Usage: <bin> --bytes:<number> --host:<target> --port:<port> --timeoutMS:<timeout>" &
+    "Usage: <bin> --bytes:<number> --host:<target> --port:<port>" &
     $terminal["reset"]
 
 var retrievedOptsCount = 0
@@ -42,9 +41,6 @@ for kind, key, val in parser.getopt():
     targetHost = val
     retrievedOptsCount += 1
   elif kind == cmdLongOption and key == "port":
-    targetPort = parseInt(val.strip())
-    retrievedOptsCount += 1
-  elif kind == cmdLongOption and key == "timeoutMS":
     targetPort = parseInt(val.strip())
     retrievedOptsCount += 1
 
@@ -65,8 +61,8 @@ var conf = parseConfig()
 
 proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}=
   try:
-    var s = newSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
-    s.setSockOpt(OptKeepAlive,true, level=IPPROTO_RAW.cint)
+    var s = newSocket(AF_INET, SOCK_STREAM, IPPROTO_RAW)
+    s.setSockOpt(OptKeepAlive,true)
 
     if(use): s.bindAddr(address=host, port=Port(port))
 
