@@ -30,7 +30,7 @@ proc Usage(): void =
     $terminal["red"] & "Invalid usage" &
     $terminal["reset"]
   echo $terminal["bold"] &
-    "Usage: myprogram --bytes:<number> --host:<target> --port:<port> --timeoutMS:<timeout>" &
+    "Usage: <bin> --bytes:<number> --host:<target> --port:<port> --timeoutMS:<timeout>" &
     $terminal["reset"]
 
 var retrievedOptsCount = 0
