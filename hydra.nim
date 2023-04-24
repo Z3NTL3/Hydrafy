@@ -47,12 +47,10 @@ for kind, key, val in parser.getopt():
   elif kind == cmdLongOption and key == "timeoutMS":
     targetPort = parseInt(val.strip())
     retrievedOptsCount += 1
-  else: 
-    Usage()
-    quit(0)
 
 if(retrievedOptsCount != 4):
   Usage()
+  quit(0)
 
 proc parseConfig(): ServerConf {.used.}=
   var Config: ServerConf
