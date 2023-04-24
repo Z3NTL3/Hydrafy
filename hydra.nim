@@ -76,6 +76,6 @@ proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}
     var msg = getCurrentException()
     echo terminal["red"] & terminal["bold"] & msg.msg & terminal["reset"]
 
-# while true:
-#   spawnX(stress_test(targetHost,targetPort,conf.use, payloadSize))
+while true:
+  spawnX(stress_test(targetHost,targetPort,conf.use, payloadSize))
   # spawn everytime a cpu core is ready to launch a new one
