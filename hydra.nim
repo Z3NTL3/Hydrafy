@@ -44,7 +44,7 @@ for kind, key, val in parser.getopt():
     targetPort = parseInt(val.strip())
     retrievedOptsCount += 1
 
-if(retrievedOptsCount != 4):
+if(retrievedOptsCount != 3):
   Usage()
   quit(0)
 
