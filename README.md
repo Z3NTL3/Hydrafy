@@ -1,6 +1,6 @@
 # Hydrafy
-**TCP SYN flood for educational purposes only**
-Pentest script to perform proxy layered or rotating relayed TCP flood on a target when ``conf.yaml`` is configured.
+**TCP SYN flood for educational purposes only**<br>
+To perform proxy layered or rotating relayed TCP flood on you have to configure  ``conf.yaml`` config file.
 
 **untested and in its beta test built**
 
