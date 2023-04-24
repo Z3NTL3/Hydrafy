@@ -12,4 +12,4 @@ nim compile -d:ssl --threads:on -d:release hydra.nim
 ```
 
 ### Usage
-Usage: ./binaryHydra.exe --bytes:<number> --host:<target> --port:<port> --timeoutMS:<timeout>
+Usage: ``<bin> --bytes:<number> --host:<target> --port:<port> --timeoutMS:<timeout>``
