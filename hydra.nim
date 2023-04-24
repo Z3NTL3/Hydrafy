@@ -34,17 +34,18 @@ proc Usage(): void =
 
 var retrievedOptsCount = 0
 for kind, key, val in parser.getopt():
-  if kind == cmdLongOption and key == "bytes":
-    discard val.parseInt(payloadSize)
-    retrievedOptsCount += 1
-  elif kind == cmdLongOption and key == "host":
-    targetHost = val
-    retrievedOptsCount += 1
-  elif kind == cmdLongOption and key == "port":
-    targetPort = parseInt(val.strip())
-    retrievedOptsCount += 1
+    if kind == cmdLongOption and key == "bytes":
+        discard val.parseInt(payloadSize)
+        retrievedOptsCount += 1
+    elif kind == cmdLongOption and key == "host":
+        targetHost = val
+        retrievedOptsCount += 1
+    elif kind == cmdLongOption and key == "port":
+        targetPort = parseInt(val.strip())
+        retrievedOptsCount += 1
+    else: discard
 
-if(retrievedOptsCount != 3):
+if(retrievedOptsCount < 3):
   Usage()
   quit(0)
 
@@ -75,6 +76,6 @@ proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}
     var msg = getCurrentException()
     echo terminal["red"] & terminal["bold"] & msg.msg & terminal["reset"]
 
-while true:
-  spawnX(stress_test(targetHost,targetPort,conf.use, payloadSize))
+# while true:
+#   spawnX(stress_test(targetHost,targetPort,conf.use, payloadSize))
   # spawn everytime a cpu core is ready to launch a new one
