@@ -66,7 +66,7 @@ var conf = parseConfig()
 proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}=
   try:
     var s = newSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
-    s.setSockOpt(OptKeepAlive,level=IPPROTO_RAW)
+    s.setSockOpt(OptKeepAlive,true, level=IPPROTO_RAW.cint)
 
     if(use): s.bindAddr(address=host, port=Port(port))
 
