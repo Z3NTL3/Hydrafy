@@ -1,4 +1,5 @@
 # Hydrafy
+**TCP SYN flood for educational purposes only**
 Pentest script to perform proxy layered or rotating relayed TCP flood on a target when ``server.yaml`` is configured.
 
 **untested and in its beta test built**
