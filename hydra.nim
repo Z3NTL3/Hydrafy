@@ -54,7 +54,7 @@ if(retrievedOptsCount != 4):
 
 proc parseConfig(): ServerConf {.used.}=
   var Config: ServerConf
-  var fileStream = newFileStream("server.yaml")
+  var fileStream = newFileStream("conf.yaml")
 
   filestream.load[:ServerConf](Config)
   fileStream.close()
