@@ -68,14 +68,9 @@ proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}
     var s = newSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
 
     if(use): s.bindAddr(address=host, port=Port(port))
-    s.connect(
-      host,
-      Port(port), 
-      timeoutMS
-    )
 
     var payload = urandom(size)
-    discard s.send(data=addr(payload), payload.len)
+    s.sendTo(host,Port(port), addr(payload), payload.len)
 
     echo "SEND " & $payload.len & " bytes amount to " & host & ":" & $port
     s.close()
