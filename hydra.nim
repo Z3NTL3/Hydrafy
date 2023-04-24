@@ -30,7 +30,7 @@ proc Usage(): void =
     $terminal["red"] & "Invalid usage" &
     $terminal["reset"]
   echo $terminal["bold"] &
-    "Usage: myprogram --bytes:<number> --host:<target> --port:<port> --timeoutMS:<timeout>" &
+    "Usage: <bin> --bytes:<number> --host:<target> --port:<port> --timeoutMS:<timeout>" &
     $terminal["reset"]
 
 var retrievedOptsCount = 0
@@ -66,16 +66,12 @@ var conf = parseConfig()
 proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}=
   try:
     var s = newSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
+    s.setSockOpt(OptKeepAlive,level=IPPROTO_RAW)
 
     if(use): s.bindAddr(address=host, port=Port(port))
-    s.connect(
-      host,
-      Port(port), 
-      timeoutMS
-    )
 
     var payload = urandom(size)
-    discard s.send(data=addr(payload), payload.len)
+    s.sendTo(host,Port(port), addr(payload), payload.len)
 
     echo "SEND " & $payload.len & " bytes amount to " & host & ":" & $port
     s.close()
