@@ -62,13 +62,14 @@ var conf = parseConfig()
 
 proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}=
   try:
-    var s = newSocket(AF_INET, SOCK_RAW, IPPROTO_RAW)
+    var s = newSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
     s.setSockOpt(OptKeepAlive,true)
 
     if(use): s.bindAddr(address=host, port=Port(port))
 
     var payload = urandom(size)
-    s.sendTo(host,Port(port), addr(payload), payload.len)
+    s.connect(host,Port(port),2000)
+    discard s.send(addr(payload), payload.len)
 
     echo "SEND " & $payload.len & " bytes amount to " & host & ":" & $port
     s.close()
