@@ -1,5 +1,5 @@
 # Hydrafy
-  **TCP SYN DDOS for educational purposes only**<br>
+  **TCP DDOS for educational purposes only**<br>
 To perform proxy layered or rotating relayed TCP flood on you have to configure  ``conf.yaml`` config file.
 
 **untested and in its beta test built**
