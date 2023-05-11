@@ -79,4 +79,4 @@ proc stress_test(host: string, port: int, use: bool, size: int): void {.thread.}
 
 while true:
   spawnX(stress_test(targetHost,targetPort,conf.use, payloadSize))
-  # spawn everytime a cpu core is ready to launch a new one
+  # spawns on a new worker core when there are enough cpu cores left, else it spawns it on the current thread
